@@ -1,0 +1,4 @@
+# Text/line endings
+* text=auto eol=lf
+*.sln text eol=crlf
+*.csproj text eol=crlf

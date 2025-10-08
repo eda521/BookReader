@@ -1,0 +1,59 @@
+﻿<Window x:Class="BookReader.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="BookReader" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="{Binding Status}" />
+            <StatusBarItem Content="{Binding ListeningHint}" />
+        </StatusBar>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Kamera + náhled obálky -->
+            <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                <Grid>
+                    <Image Source="{Binding CameraImage}" Stretch="Uniform" />
+                    <Button Content="Vyfoť" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="8"
+                            Width="100" Height="36" Command="{Binding CaptureCoverCommand}"/>
+                </Grid>
+            </Border>
+
+            <!-- Formulář knihy -->
+            <ScrollViewer Grid.Column="1">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+                    <TextBlock Text="Kniha" FontWeight="Bold" FontSize="18" Margin="0,0,0,8"/>
+                    <TextBox Text="{Binding Edit.Title, UpdateSourceTrigger=PropertyChanged}" Tag="Název" Margin="0,0,0,6"/>
+                    <TextBox Text="{Binding Edit.Authors, UpdateSourceTrigger=PropertyChanged}" Tag="Autor/autoři (oddělit čárkou)" Margin="0,0,0,6"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBox Width="80" Text="{Binding Edit.Year}" Margin="0,0,6,0" />
+                        <TextBox Text="{Binding Edit.Publisher}" Tag="Vydavatelství"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBox Width="80" Text="{Binding Edit.WidthMm}"  Tag="Šířka (mm)" Margin="0,0,6,0"/>
+                        <TextBox Width="80" Text="{Binding Edit.HeightMm}" Tag="Výška (mm)" Margin="0,0,6,0"/>
+                        <TextBox Width="80" Text="{Binding Edit.DepthMm}"  Tag="Hloubka (mm)"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding Edit.Isbn}" Tag="ISBN" Margin="0,0,0,6"/>
+                    <TextBox Text="{Binding Edit.Tags}" Tag="Tagy (oddělit čárkou)" Margin="0,0,0,6"/>
+                    <TextBox Text="{Binding Edit.MainGroup}" Tag="Hlavní skupina" Margin="0,0,0,6"/>
+                    <TextBox Text="{Binding Edit.Annotation}" AcceptsReturn="True" Height="160" TextWrapping="Wrap"
+                             Tag="Anotace" Margin="0,0,0,6"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                        <Button Content="Uložit" Width="100" Height="36" Margin="0,0,6,0" Command="{Binding SaveCommand}"/>
+                        <Button Content="Nová"   Width="100" Height="36" Command="{Binding NewCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
+</Window>

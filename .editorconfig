@@ -1,0 +1,5 @@
+root = true
+
+[*.cs]
+dotnet_diagnostic.IDE0058.severity = silent
+dotnet_diagnostic.IDE0090.severity = suggestion
